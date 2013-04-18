@@ -1,4 +1,4 @@
-Book-Esper_reference_cn
+Bok-Esper_reference_cn
 =======================
 
 Esper Reference的中文版【翻译】
@@ -20,4 +20,4 @@ Esper Reference的中文版【翻译】
 - 以纸媒出版为目的，改写、改编以及摘抄本书的内容
 
 目录
-----
+-----

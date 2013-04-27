@@ -24,4 +24,4 @@ Indices and tables
 Sources of Esper
 ================
 
-.. http://dist.codehaus.org/esper/
+* http://dist.codehaus.org/esper/

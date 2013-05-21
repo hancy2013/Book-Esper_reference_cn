@@ -101,6 +101,10 @@
 	
 	select `candidate book` , `children's books`[0], `book select`('isbn') from MyEventType
 	
+	2.2.2 Key或者index value是表达式
+	
+	
+	
 	2.3 事件的动态属性
 	
 	

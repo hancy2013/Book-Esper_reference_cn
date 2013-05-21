@@ -94,6 +94,13 @@
 	
 	select `order`, price as `price.for.goods` from Quote
 	
+	当对映射或者索引属性进行转义的时候，要确保转义在映射的key或索引里面进行。
+	
+	下面的EPL是一个属性名称包含空格(e.g. candidate book), 有特殊标记(e.g. children's books), 是一个索引(e.g. 
+	children's books[0])和一个映射属性并且key是一个保留关键字(e.g. book select('isbn'))的语句: 
+	
+	select `candidate book` , `children's books`[0], `book select`('isbn') from MyEventType
+	
 	2.3 事件的动态属性
 	
 	

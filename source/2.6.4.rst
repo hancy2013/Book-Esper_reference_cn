@@ -58,15 +58,15 @@ object-array事件类型的数组。
 	
 	demo演示::
 
-	Map<String,Obejct> sale = new HashMap<String,Object>();
-	sale.put("useroIds",int[].class);
-	sale.put("salesPerson",salesPerson[].class);
-	sale.put("items","OrderItem[]");
+		Map<String,Obejct> sale = new HashMap<String,Object>();
+		sale.put("useroIds",int[].class);
+		sale.put("salesPerson",salesPerson[].class);
+		sale.put("items","OrderItem[]");
 
-	epService.getAdministrator.getConfiguration().addEventType("SalesEvent",sale);
+		epService.getAdministrator.getConfiguration().addEventType("SalesEvent",sale);
 
-    //epl
-    select useroIds[0],salesPerson[1].personName,items[1].price.amount from SalesEvent
+	    //epl
+	    select useroIds[0],salesPerson[1].personName,items[1].price.amount from SalesEvent
 
 解释说明：
    

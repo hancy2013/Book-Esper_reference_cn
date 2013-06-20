@@ -11,6 +11,7 @@
 使用Map事件前，其事件类型名称、事件属性及事件属性的类型必须使用Configuration、static Configuration或create schema来定义。
 
 下面的例子是创建Map事件及发送事件到Esper的demo::
+	
 	//define "mapEvent" event type (example for runtime configuration)
 	Map<String,Object> def = new HashMap<String,Object>();
 	def.put("myString",String.class);

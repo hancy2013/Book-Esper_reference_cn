@@ -4,7 +4,7 @@
 
 Map事件的父事件必须是map类型事件。父事件的属性及属性类型对于其孩子事件都是可见的，并且会覆盖孩子事件中相同名称的属性，与java中的接口类似。
 
-demo ::
+demo::
 	
 	epService.getEPAdministrator().getConfiguration().addEventType("AccountUpdate", accountUpdateDef,new String[] {"BaseUpdate"})
 	//epl

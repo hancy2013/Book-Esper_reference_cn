@@ -7,11 +7,11 @@ update istream的语法如下::
 	
 	update istream event_type [as stream_name]
 		set property_name = set_expression[,property_name = set_pression] [...]
-	[where where_expression]
+		[where where_expression]
 
--event_type是要更新事件的事件类型名称。as是可选的，用来将名称跟事件类型相关联，方便后续的子查询使用。紧随其后的是以逗号为分隔符的属性列表和其表达式(属性名称即要改变的属性，表达式即要设置的值)。
+- event_type是要更新事件的事件类型名称。as是可选的，用来将名称跟事件类型相关联，方便后续的子查询使用。紧随其后的是以逗号为分隔符的属性列表和其表达式(属性名称即要改变的属性，表达式即要设置的值)。
 
--where，可选，此表达式过滤需要更新事件属性的事件类型。
+- where，可选，此表达式过滤需要更新事件属性的事件类型。
 
 对于一个update Statement来讲，其监听器(Listener)会收到两个更新事件：一个是新数据(insert stream),另一个是旧数据(remove stream)。假如多个update Statement都指向同一个事件，引擎会保证针对监听器或订阅者，其发送过去的事件会与该事件当前的更新行为相匹配(假如事件复制是可以的，就像下面描述的一样，这种情况，事件监听器与update Statement绑定在一起)。
 
@@ -19,7 +19,7 @@ update istream的语法如下::
 	
 	update istream AlertEvent
 		set security = 'High' 
-	where security = 'Medium' and reason like '%withdrawl limit%'
+		where security = 'Medium' and reason like '%withdrawl limit%'
 
 上述的Update Statement会将AlertEvent事件的属性security设置为High(当该事件的security为medium及reason为某些特殊内容时)。
 
@@ -44,8 +44,8 @@ Update Statment习惯借助insert into用到stream上。下面代码使用了模
 	@Name("InsertWindow") insert into MyWindow select * from AlertEvent
 	@Name("SelectWindow") select * from MyWindow
 
--UpdateStream Statement对进入该窗口的所有事件配置了一个更新语句。注意，该update Statement在创建时，对已经在该窗口存在的事件不起任何作用，它只对从创建该语句开始后进入该窗口的事件。
--对于SelectWindow和CreateWindow的监听器，都会收到update事件；然而InsertWindow的监听器收到的是原有的AlertEvent事件。//TODO
+- UpdateStream Statement对进入该窗口的所有事件配置了一个更新语句。注意，该update Statement在创建时，对已经在该窗口存在的事件不起任何作用，它只对从创建该语句开始后进入该窗口的事件。
+- 对于SelectWindow和CreateWindow的监听器，都会收到update事件；然而InsertWindow的监听器收到的是原有的AlertEvent事件。//TODO
 
 子查询也可以用在所有的表达式，包括可选的where子句。
 
@@ -57,8 +57,8 @@ Update Statment习惯借助insert into用到stream上。下面代码使用了模
 
 其他改变事件属性的注意事项：
 
--使用索引，propertyName[index] = value ,其中index必须为整形；
--使用map更新，propertyName[key] = value ,其中key必须为String;
+- 使用索引，propertyName[index] = value ,其中index必须为整形；
+- 使用map更新，propertyName[key] = value ,其中key必须为String;
 
 当使用Update，必须注意几个使用限制：
 	1. 表达式不能使用聚合函数；

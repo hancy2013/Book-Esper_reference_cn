@@ -13,7 +13,7 @@ update istream的语法如下::
 
 - where，可选，此表达式过滤需要更新事件属性的事件类型。
 
-对于一个update Statement来讲，其监听器(Listener)会收到两个更新事件：一个是新数据(insert stream),另一个是旧数据(remove stream)。假如多个update Statement都指向同一个事件，引擎会保证针对监听器或订阅者，其发送过去的事件会与该事件当前的更新行为相匹配(假如事件复制是可以的，就像下面描述的一样，这种情况，事件监听器与update Statement绑定在一起)。
+对于一个update Statement来讲，其监听器(Listener)会收到两个更新事件：一个是新数据(insert stream),另一个是旧数据(remove stream)。假如多个update Statement都指向同一个事件，引擎会保证针对监听器或订阅者，其发送过去的事件会与该事件当前的更新行为相匹配(假如事件复制是可以的，就像下面描述的一样，这种情况下，事件监听器与update Statement绑定在一起)。
 
 如下例::
 	
@@ -45,6 +45,7 @@ Update Statment习惯借助insert into用到stream上。下面代码使用了模
 	@Name("SelectWindow") select * from MyWindow
 
 - UpdateStream Statement对进入该窗口的所有事件配置了一个更新语句。注意，该update Statement在创建时，对已经在该窗口存在的事件不起任何作用，它只对从创建该语句开始后进入该窗口的事件。
+
 - 对于SelectWindow和CreateWindow的监听器，都会收到update事件；然而InsertWindow的监听器收到的是原有的AlertEvent事件。//TODO
 
 子查询也可以用在所有的表达式，包括可选的where子句。
@@ -62,16 +63,16 @@ Update Statment习惯借助insert into用到stream上。下面代码使用了模
 
 当使用Update，必须注意几个使用限制：
 	1. 表达式不能使用聚合函数；
-	#. pre 和prio函数不能使用；
+	#. pre 和 prio函数不能使用；
 	#. 当使用内置java对象表示的事件类型，其类必须实现Serializable接口；
 	#. 当使用内置xml事件类型时，在xml document 中的事件属性在update是不能使用的；
-	#. 内嵌属性不支持update，
-	#. 版本标记事件类型及变量Stream在某些情况下也是不支持update。
+	#. 内嵌属性不支持update；
+	#. 版本标记事件类型及变量Stream在某些情况下也不支持update。
 
 **5.21.1 事件的不变性与更新**
 	
 在更新事件时，引擎会维护多个Statement间的一致性：引擎会保证事件的更新不会影响到非更新的事件或原有的事件。所以，引擎会复制一个事件对象来保证一致性。
 
-当程序创建一个POJO来表示某事件时，一旦有update Statement对该事件进行更新时，引擎会复制这个POJO的实例，然后进行更新，不会影响之前原有的事件，来保证事件的一致性。
+当程序创建一个POJO来表示某事件时，一旦有update Statement对该事件进行更新时，引擎会复制这个POJO的实例，然后进行更新，不会影响之前原有的事件，以此来保证事件的一致性。
 
 针对java对象，复制是通过Serialization来实现的。因此，事件类必须实现该接口后才能进行相关的更新操作。另一种方式是，可以通过ConfigurationEventTypeLegacy来配置一个复制的方法来实现。

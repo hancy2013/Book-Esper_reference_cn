@@ -102,16 +102,57 @@
 	select `candidate book` , `children's books`[0], `book select`('isbn') from MyEventType
 	
 	2.2.2 Key或者index value是表达式
+	键或者索引表达式必须放在括号内。当使用表达式作为键时，这个表达式必须返回的是一个String类型。同理，在使用表达式作为索引时，这个表达式必须返回的是一个int类型。
 	
+	下面的例子是使用Java类来演示的。同样的原理适用于所有事件表示方式。
 	
+	假设一个类声明了下面这些属性（为了简单省略了getters）
 	
+		public class MyEventType {
+			String myMapKey;
+			
+			int myIndexValue;
+			
+		  	int myInnerIndexValue;
+		  	
+		  	Map<String, InnerType> innerTypesMap;	// mapped property
+		  	
+		  	InnerType[] innerTypesArray; // indexed property
+		}
+		
+		public class InnerType {
+		
+		  	String name;
+		  	
+		  	int[] ids;
+		}
+	
+	下面用表达式作为Key和Index的一个简单的EPL表达式：
+	
+		select innerTypesMap('somekey').ids[1],
+		
+	  		innerTypesMap(myMapKey).getIds(myIndexValue),
+	  		
+	  		innerTypesArray[1].ids[2],
+	  		
+	  		innerTypesArray(myIndexValue).getIds(myInnerIndexValue)
+	  		
+		from MyEventType
+	  	
+	注意以下限制：
+	
+	对应方括号里的索引，可以是一个表示式并且是常量。
+	
+	对于使用'.'操作符来说，用作Key或者Index的表达式必须遵循方法链调用语法。
+	
+		
 	2.3 事件的动态属性
 	
 	
 
-	2.4 Fragment 和 Fragment类型 （ 是否翻译为碎片？ ）
+	2.4. Fragment 和 Fragment类型 （ 是否翻译为碎片？ ）
 
-	2.5 POJO 对象事件
+	2.5. POJO 对象事件
 
 	2.6 java.util.Map 事件
 

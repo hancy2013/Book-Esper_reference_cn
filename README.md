@@ -22,9 +22,7 @@ Book-Esper_reference_cn
 - 擅自印刷、出版本书
 - 以纸媒出版为目的，改写、改编以及摘抄本书的内容
 
-'阅读，从目录开始'_
-
-.. _[阅读，从目录开始:](tableContent.md)
+[阅读，从目录开始](source/perface.md)
 
 ========
 团队成员
